@@ -21,7 +21,7 @@ public class ClassElement implements Element {
     }
 
     @Override
-    public Node render() {
+    public Node createNode() {
         // VBox as root container
         VBox root = new VBox();
         
@@ -35,6 +35,7 @@ public class ClassElement implements Element {
         StackPane classNameContainer = new StackPane();
         classNameContainer.setPadding(new Insets(5)); //TODO obtain from diagram properties
         classNameContainer.getChildren().add(classNameText);
+        
         root.getChildren().add(classNameContainer);
         
         return root;

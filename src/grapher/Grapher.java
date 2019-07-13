@@ -33,8 +33,8 @@ public class Grapher extends Application {
         // Create UI
         root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
-        // Render the diagram
-        diagram.renderOn(root);
+        // Add the diagram
+        root.getChildren().add(diagram);
         
         // Final UI setup & reveal
         Scene scene = new Scene(root);

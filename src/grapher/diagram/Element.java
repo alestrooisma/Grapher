@@ -4,5 +4,5 @@ import javafx.scene.Node;
 
 public interface Element {
     
-    public Node render();
+    public Node createNode();
 }

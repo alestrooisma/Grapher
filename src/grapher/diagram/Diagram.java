@@ -1,26 +1,32 @@
 package grapher.diagram;
 
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
-public class Diagram {
-    private final LinkedList<Element> elements = new LinkedList<>();
-    private final int spacing = 0;
-
-    public boolean add(Element e) {
-        return elements.add(e);
+public class Diagram extends Region {
+    private final HashMap<Element, Node> elements = new HashMap<>();
+    private final int spacing = 20;
+    
+    public void add(Element e) {
+        Node node = e.createNode();
+        elements.put(e, node);
+        this.getChildren().add(node);
     }
 
-    public void renderOn(Pane pane) {
+    @Override
+    public void layoutChildren() {
         double x = 0;
-        for (Element e : elements) {
-            Node node = e.render();
-            pane.getChildren().add(node);
+        for (Map.Entry<Element, Node> pair : elements.entrySet()) {
+//            Element e = pair.getKey();
+            Node node = pair.getValue();
+            
+            if (node.isResizable() && node.isManaged()) {
+                node.autosize();
+            }
+            
             node.setLayoutX(x);
-            System.out.println(node.getLayoutBounds());
-            System.out.println(node.getBoundsInLocal());
-            System.out.println(node.getBoundsInParent());
             x = node.getBoundsInParent().getMaxX() + spacing;
         }
     }
