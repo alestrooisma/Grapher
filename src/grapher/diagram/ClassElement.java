@@ -29,15 +29,50 @@ public class ClassElement implements Element {
         root.setBorder(new Border(new BorderStroke(Color.BLACK, 
             BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         
-        // Add class name
-        Text classNameText = new Text(me.getName());
-        classNameText.setStyle("-fx-font-weight: bold"); //TODO obtain font from diagram properties
-        StackPane classNameContainer = new StackPane();
-        classNameContainer.setPadding(new Insets(5)); //TODO obtain from diagram properties
-        classNameContainer.getChildren().add(classNameText);
-        
-        root.getChildren().add(classNameContainer);
+        // Add contents
+        root.getChildren().addAll(createClassName(), createAttributes(), createOperations());
         
         return root;
+    }
+
+    private Node createClassName() {
+        Text classNameText = new Text(me.getName());
+        classNameText.setStyle("-fx-font-weight: bold"); //TODO obtain font from diagram properties
+        
+        StackPane classNameContainer = new StackPane();
+        classNameContainer.setPadding(new Insets(5)); //TODO obtain from diagram properties
+        
+        classNameContainer.getChildren().add(classNameText);
+        
+        return classNameContainer;
+    }
+    
+    private Node createAttributes() {
+        // Dummy attribute
+        Text attribute = new Text("- attribute : Type");
+        
+        VBox attributeBox = new VBox();
+        attributeBox.setPadding(new Insets(3));
+        attributeBox.setBorder(new Border(new BorderStroke(Color.BLACK, 
+            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0)))); //TODO obtain from diagram properties
+        
+        attributeBox.getChildren().add(attribute);
+        
+        return attributeBox;
+    }
+    
+    private Node createOperations() {
+        // Dummy attribute
+        Text operation1 = new Text("+ getAttr() : Type");
+        Text operation2 = new Text("+ setAttr(attr : Type) : void");
+        
+        VBox operationBox = new VBox();
+        operationBox.setPadding(new Insets(3));
+        operationBox.setBorder(new Border(new BorderStroke(Color.BLACK, 
+            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1, 0, 0, 0)))); //TODO obtain from diagram properties
+        
+        operationBox.getChildren().addAll(operation1, operation2);
+        
+        return operationBox;
     }
 }
